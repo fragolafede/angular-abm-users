@@ -66,7 +66,7 @@ export class HomeComponent implements OnInit {
   }
 
   displayUser(_user){
-    console.log("Clickeaste en mostrar a " + _user.payload.doc.data().first_name);
+    //console.log("Clickeaste en mostrar a " + _user.payload.doc.data().first_name);
   }
 
   editUser(_user) {
