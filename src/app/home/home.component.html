@@ -1,0 +1,58 @@
+
+
+<div *ngIf="!showForm">
+    <h1> Home </h1>
+    <ul *ngIf="users">
+        <!--<li *ngFor="let user of users" (click)="onUserClick(user)">-->
+        <li *ngFor="let user of users">
+            <img [src]="user.payload.doc.data().avatar">
+            <p>{{ user.payload.doc.data().first_name }} {{ user.payload.doc.data().last_name }} <i (click)="deleteUser(user)" class="material-icons">delete</i><i (click)="editUser(user)" class="material-icons">edit</i><i (click)="displayUser(user)" class="material-icons">zoom_in</i></p>
+            
+        </li>
+    </ul>
+
+    <button (click)="addNewUser()" data-toggle="tooltip" title="Agregar" class="cta"><i class="material-icons">add</i></button>
+    <button (click)="refreshUsers()" data-toggle="tooltip" title="Actualizar" class="cta"><i class="material-icons">refresh</i></button>
+</div>
+
+
+
+<!-- 
+    Se podría cambiar por algo que verifique al final de la función getUsers(), sino inicia 
+    visible porque inicialmente no hay nada en "users"
+-->
+<div *ngIf="!users">No hay ningún usuario cargado</div>
+
+<br><br>
+
+<h1 *ngIf="formAction=='A'"> Agregar usuario </h1>
+<h1 *ngIf="formAction=='E'"> Editar usuario </h1>
+<br />
+<div *ngIf="showForm">
+    <form [formGroup]="this.dataService.form">
+        <input placeholder="User ID" 
+            formControlName="id" 
+            type="text" 
+            class="input-field col s12">
+        <input placeholder="First name" 
+            formControlName="first_name" 
+            type="text" 
+            class="input-field col s12">
+        <input placeholder="Last name" 
+            formControlName="last_name" 
+            type="text" 
+            class="input-field col s12">
+        <input placeholder="Email" 
+            formControlName="email" 
+            type="text" 
+            class="input-field col s12">
+        <textarea placeholder="Avatar URL" 
+            formControlName="avatar"
+            class="input-field col s12"></textarea>
+            <div class="controls">
+                <button (click)="submitForm()" data-toggle="tooltip" title="Enviar" class="cta"><i class="material-icons">send</i></button>
+                <button (click)="resetForm()" data-toggle="tooltip" title="Borrar todo" class="cta"><i class="material-icons">delete</i></button>
+                <button (click)="cancelForm()" data-toggle="tooltip" title="Cancelar" class="cta"><i class="material-icons">cancel</i></button>    
+            </div>
+        </form>
+</div>
